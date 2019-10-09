@@ -16,7 +16,7 @@ import org.solent.com504.factoryandfacade.model.FarmFacade;
 public class FarmFacadeSpringImpl implements FarmFacade {
 
     public List<Animal> getAllAnimals() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        
     }
 
     public void addDog(String name) {
