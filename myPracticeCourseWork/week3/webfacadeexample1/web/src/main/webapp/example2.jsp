@@ -1,3 +1,4 @@
+<%@page import="com.sun.corba.se.spi.presentation.rmi.StubAdapter.request(Object, String, boolean)"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -41,14 +42,16 @@
     <body>
         <p>Page for Farm</p>
         animalNameStr = <%=animalNameStr %>
+        animalTypeStr = <%=animalTypeStr %>
+
         <p>Supported Animal Types</p>
-        <form action="<%
-              
-              farmFacade.addAnimal(animalTypeStr,animalNameStr);%>"
+        <form action=" <%= farmFacade.addAnimal( animalTypeStr,request.getParameter("Name"))%>
             <table>
-                <% for (String animalType : supportedAnimalTypes) {%>
+                <% for (String animalType : supportedAnimalTypes) {
+                animalTypeStr=animalType;
+        %>
                 <tr>
-                    <td><%=animalType%></td><%animalTypeStr=animalType;%>
+                    <td><%= animalType %></td>
                     <td><input type="submit" value="submit"></td>
                     <td>Name:<input type="text" name="Name" ></td>
                 </tr>
