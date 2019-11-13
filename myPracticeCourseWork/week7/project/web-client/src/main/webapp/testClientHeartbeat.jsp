@@ -22,13 +22,13 @@
 
     // accessing request parameters
     String actionStr = request.getParameter("action");
-
+    String test_send = request.getParameter("Test_send");
     // basic error checking before making a call
     if (actionStr == null || actionStr.isEmpty()) {
         // do nothing
 
-    } else if ("XXX".equals(actionStr)) {
-        // put your actions here
+    } else if ("onSite".equals(actionStr)) {
+        serviceFacade.personOnSite(name, site);
     } else {
         errorMessage = "ERROR: page called for unknown action";
     }
@@ -49,7 +49,17 @@
 
         <p>The time is: <%= new Date().toString()%> (note page is auto refreshed every 20 seconds)</p>
 
-        <p>Getting heartbeat message: <%= serviceFacade.getHeartbeat()%> (note message is auto refreshed every 20 seconds)</p>
+        <!--><p>Getting heartbeat message: <//%= serviceFacade.getHeartbeat()%> (note message is auto refreshed every 20 seconds)</p><!-->
+
+        <form action ="./testClientHeartbeat.jsp" method="post">
+            <input type="hidden" name="action" value="onSite">
+
+            <button type="submit" >Send on site</button>
+        </form>
+        <form action ="./testClientHeartbeat.jsp" method="post">
+            <input type="hidden" name="action" value="leavingSite">
+            <button type="submit" >Leaving site</button>
+        </form>
 
     </body>
 </html>

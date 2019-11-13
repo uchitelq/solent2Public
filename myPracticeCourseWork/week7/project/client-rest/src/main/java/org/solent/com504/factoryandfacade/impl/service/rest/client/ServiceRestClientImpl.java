@@ -56,5 +56,15 @@ public class ServiceRestClientImpl implements ServiceFacade {
 
     }
 
+    @Override
+    public boolean personOnSite(String name, String site) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean personLeavingSite(String name, String site) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 }

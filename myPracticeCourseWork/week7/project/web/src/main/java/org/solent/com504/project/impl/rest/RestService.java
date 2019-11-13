@@ -63,7 +63,7 @@ public class RestService {
     @GET
     @Path("/getHeartbeat")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response getAllAnimals() {
+    public Response getHeartbeat() {
         try {
 
             ServiceFacade serviceFacade = WebObjectFactory.getServiceFacade();
@@ -74,6 +74,38 @@ public class RestService {
             replyMessage.setDebugMessage(heartbeat);
             
             replyMessage.setCode(Response.Status.OK.getStatusCode());
+            
+            return Response.status(Response.Status.OK).entity(replyMessage).build();
+            
+        } catch (Exception ex) {
+            LOG.error("error calling /getHeartbeat ", ex);
+            ReplyMessage replyMessage = new ReplyMessage();
+            replyMessage.setCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            replyMessage.setDebugMessage("error calling /getHeartbea " + ex.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(replyMessage).build();
+        }
+    }
+    
+    // http://localhost:8084/projectfacadeweb/rest/appointmentService/personOnSite
+     @GET
+    @Path("/personOnSite")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response personOnSite(@QueryParam("name")String name, @QueryParam("site") String site ) {
+        try {
+
+            ServiceFacade serviceFacade = WebObjectFactory.getServiceFacade();
+            ReplyMessage replyMessage = new ReplyMessage();
+            LOG.debug("/personOnSite called");
+            
+           boolean ok =  serviceFacade.personOnSite(name, site);
+           if(ok){
+               replyMessage.setCode(Response.Status.OK.getStatusCode());
+           }else {
+               replyMessage.setCode(Response.Status.BAD_REQUEST.getStatusCode());
+               replyMessage.setDebugMessage("could not find "+name);
+           }
+                      
+            
             
             return Response.status(Response.Status.OK).entity(replyMessage).build();
             

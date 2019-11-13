@@ -1,0 +1,4 @@
+TestClient heartbeat -> populvam info vuv form-a, zapazva se v parametar (red 24) kakvo da se pravi (send on site,leace site..)
+
+If-else koe deistvie se sluchva,  vutre trqbva da ima modifikacii na izteglenata service facade 
+
