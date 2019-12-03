@@ -48,7 +48,12 @@ public class ServiceFacadeImpl implements ServiceFacade {
 
     @Override
     public boolean personLeavingSite(String name, String site) {
-        LOG.debug("personOnSite called");
+        LOG.debug("personOnSite called site=" + site + "name=" + name);
+
+        LOG.debug("personLeavingSite called");
+        if (name == null || site == null) {
+            return false;
+        }
         return true;
     }
 

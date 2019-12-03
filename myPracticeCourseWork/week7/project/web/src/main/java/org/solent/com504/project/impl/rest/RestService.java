@@ -86,6 +86,33 @@ public class RestService {
         }
     }
     
+     @GET
+    @Path("/personLeavingSite")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+     public Response personLeavingSite(@QueryParam("name")String name, @QueryParam("site") String site){
+         try{
+              ServiceFacade serviceFacade = WebObjectFactory.getServiceFacade();
+            ReplyMessage replyMessage = new ReplyMessage();
+            LOG.debug("/personleavingsite called");
+            boolean ok =  serviceFacade.personLeavingSite(name, site);
+            
+            if(ok){
+               replyMessage.setCode(Response.Status.OK.getStatusCode());
+           }else {
+               replyMessage.setCode(Response.Status.BAD_REQUEST.getStatusCode());
+               replyMessage.setDebugMessage("could not find "+name);
+           }
+            return Response.status(Response.Status.OK).entity(replyMessage).build();
+         }
+         catch (Exception ex) {
+            LOG.error("error calling /personLeaving ", ex);
+            ReplyMessage replyMessage = new ReplyMessage();
+            replyMessage.setCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            replyMessage.setDebugMessage("error calling /PersonLeavingSite " + ex.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(replyMessage).build();
+        }
+     }
+    
     // http://localhost:8084/projectfacadeweb/rest/appointmentService/personOnSite
      @GET
     @Path("/personOnSite")
@@ -113,10 +140,12 @@ public class RestService {
             LOG.error("error calling /getHeartbeat ", ex);
             ReplyMessage replyMessage = new ReplyMessage();
             replyMessage.setCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-            replyMessage.setDebugMessage("error calling /getHeartbea " + ex.getMessage());
+            replyMessage.setDebugMessage("error calling /PersonOnSite " + ex.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(replyMessage).build();
         }
+        
     }
+    
 
  
 
