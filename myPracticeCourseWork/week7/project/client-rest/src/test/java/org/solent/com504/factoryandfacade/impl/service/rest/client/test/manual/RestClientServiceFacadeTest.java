@@ -46,5 +46,14 @@ public class RestClientServiceFacadeTest {
 
         LOG.debug("end of testGetHeartbeat()");
     }
+    @Test
+    public void testPersonOnSite(){
+        LOG.debug("start of testpersonOnSite()");
+        boolean ok = serviceFacade.personOnSite(null, null);
+        
+        assertEquals(ok,true);
+
+        
+    }
 
 }

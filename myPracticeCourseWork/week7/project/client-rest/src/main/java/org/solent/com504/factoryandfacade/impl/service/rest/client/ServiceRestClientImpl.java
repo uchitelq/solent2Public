@@ -55,10 +55,27 @@ public class ServiceRestClientImpl implements ServiceFacade {
         return replyMessage.getDebugMessage();
 
     }
-
+            
     @Override
     public boolean personOnSite(String name, String site) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        LOG.debug("personOnSite(name,site) called");
+        
+        Client client = ClientBuilder.newClient(new ClientConfig().register(LoggingFilter.class));
+        WebTarget webTarget = client.target(baseUrl).path("personOnSite");
+        
+         MultivaluedMap<String, String> formData = new MultivaluedHashMap<String, String>();
+        formData.add("name", name);
+        formData.add("site", site);
+
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_XML);
+        Response response = invocationBuilder.post(Entity.form(formData));
+        
+        ReplyMessage replyMessage = response.readEntity(ReplyMessage.class);
+        LOG.debug("Response status=" + response.getStatus() + " ReplyMessage: " + replyMessage);
+        
+        if(replyMessage==null) return false;
+        return true;
+
     }
 
     @Override

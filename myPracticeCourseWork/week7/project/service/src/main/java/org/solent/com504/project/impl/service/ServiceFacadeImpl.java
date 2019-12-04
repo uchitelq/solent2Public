@@ -43,6 +43,8 @@ public class ServiceFacadeImpl implements ServiceFacade {
         if (name == null || site == null) {
             return false;
         }
+        
+        
         return true;
     }
 

@@ -86,7 +86,13 @@ public class RestService {
         }
     }
     
-     @GET
+    /**
+     * http://localhost:8084/projectfacadeweb/rest/appointmentService/personLeavingSite
+     * @param name
+     * @param site
+     * @return 
+     */
+    @POST
     @Path("/personLeavingSite")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
      public Response personLeavingSite(@QueryParam("name")String name, @QueryParam("site") String site){
@@ -114,7 +120,7 @@ public class RestService {
      }
     
     // http://localhost:8084/projectfacadeweb/rest/appointmentService/personOnSite
-     @GET
+    @GET
     @Path("/personOnSite")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response personOnSite(@QueryParam("name")String name, @QueryParam("site") String site ) {
