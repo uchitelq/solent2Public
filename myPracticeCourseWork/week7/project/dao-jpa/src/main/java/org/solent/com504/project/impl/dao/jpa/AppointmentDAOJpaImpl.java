@@ -7,6 +7,7 @@ package org.solent.com504.project.impl.dao.jpa;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.solent.com504.project.model.dao.AppointmentDAO;
@@ -40,7 +41,9 @@ public class AppointmentDAOJpaImpl implements AppointmentDAO {
 
     @Override
     public List<Appointment> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Appointment> q = entityManager.createQuery("SELECT p FROM Appointment p", Appointment.class);
+        List<Appointment> appointmentList = q.getResultList();
+        return appointmentList;    
     }
 
     @Override
@@ -55,8 +58,9 @@ public class AppointmentDAOJpaImpl implements AppointmentDAO {
 
     @Override
     public void deleteAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        entityManager.getTransaction().begin();
+        entityManager.createQuery("DELETE FROM Appointment ").executeUpdate();
+        entityManager.getTransaction().commit();    }
 
     @Override
     public List<Appointment> findByPersonA(Person personA) {

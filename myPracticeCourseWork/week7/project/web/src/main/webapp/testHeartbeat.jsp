@@ -1,3 +1,4 @@
+<%@page import="org.solent.com504.project.model.dto.Role"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -32,6 +33,7 @@
     Long a=new Long(15);
     tempPerson.setId(a);
     tempPerson.setSecondName("SecondName");
+      tempPerson.setRole(Role.DENTIST);
     
     // basic error checking before making a call
     if (actionStr == null || actionStr.isEmpty()) {
@@ -49,7 +51,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-                <link rel="stylesheet" type="text/css" href="../css/style.css">
+         <link rel="stylesheet" type="text/css" href="css/style.css">
 
         <title>JSP Server Page for heart beat</title>
     </head>
@@ -69,7 +71,7 @@
 			<th>title</th>
 			<th>author</th>
 			<th>isbn</th>
-			<th></th>
+			<th>Role</th>
 		</tr>
 		<%
 			for (Person person : personList) {
@@ -79,7 +81,7 @@
 			<td><%=((person.getFirstName()==null) ? "":person.getFirstName()) %></td>
 			<td><%=((person.getSecondName()==null) ? "":person.getSecondName()) %></td>
                         <td><%=((person.getAddress()==null) ? "":person.getAddress()) %></td>
-                            <!--GETROLE-->
+                        <td><%=((person.getRole()==null) ? "":person.getRole()) %></td>
 			<td>
 			
 			</td>
