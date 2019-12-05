@@ -23,6 +23,8 @@
     // accessing request parameters
     String actionStr = request.getParameter("action");
     String test_send = request.getParameter("Test_send");
+    String name=null;
+    String site=null;
     // basic error checking before making a call
     if (actionStr == null || actionStr.isEmpty()) {
         // do nothing
