@@ -12,9 +12,9 @@ public interface AppointmentDAO {
 
     public List<Appointment> findAll();
 
-    public Appointment delete(Appointment appointment);
+    public boolean delete(Appointment appointment);
 
-    public void deleteById(Long id);
+    public boolean deleteById(Long id);
 
     public void deleteAll();
 

@@ -12,9 +12,9 @@ public interface PersonDAO {
 
     public List<Person> findAll();
 
-    public void deleteById(long id);
+    public boolean deleteById(long id);
 
-    public Person delete(Person person);
+    public boolean delete(Person person);
 
     public void deleteAll();
 
