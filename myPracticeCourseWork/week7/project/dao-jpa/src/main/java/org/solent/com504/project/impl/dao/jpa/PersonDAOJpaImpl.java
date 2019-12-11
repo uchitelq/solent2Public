@@ -7,6 +7,7 @@ package org.solent.com504.project.impl.dao.jpa;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,7 +28,7 @@ public class PersonDAOJpaImpl implements PersonDAO {
     public PersonDAOJpaImpl(EntityManager em) {
         this.entityManager = em;
     }
-
+//solent2Public/week9/webfacadeexample2-spring/dao-jpa/src/main/java/org/solent/com504/factoryandfacade/impl/dao/jpa/AnimalDaoJpaImpl.java
     @Override
     public Person findById(Long id) {
         Person person = entityManager.find(Person.class, id);
@@ -51,6 +52,7 @@ public class PersonDAOJpaImpl implements PersonDAO {
     }
 
     @Override
+<<<<<<< HEAD
     public boolean deleteById(long id) {
         Person temp = findById( id);
         if(temp ==null) return false;
@@ -59,6 +61,14 @@ public class PersonDAOJpaImpl implements PersonDAO {
         entityManager.getTransaction().commit();
         return true;    
     }
+=======
+    public void deleteById(long id) {
+        entityManager.getTransaction().begin();
+        Query q = entityManager.createQuery("DELETE FROM Person a WHERE a.id=:id");
+        q.setParameter("id", id);
+        q.executeUpdate();
+        entityManager.getTransaction().commit();    }
+>>>>>>> f8b45a53c3b412b3b531c12447afc789b9c51ba3
 
     @Override
     public boolean delete(Person person) {
