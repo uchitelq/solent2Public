@@ -18,9 +18,5 @@ public interface AppointmentDAO {
 
     public void deleteAll();
 
-    public List<Appointment> findByPersonA(Person personA);
 
-    public List<Appointment> findByPersonB(Person personB);
-
-    public List<Appointment> findByDate(Integer year, Integer month, Integer hour, Integer minutes);
 }

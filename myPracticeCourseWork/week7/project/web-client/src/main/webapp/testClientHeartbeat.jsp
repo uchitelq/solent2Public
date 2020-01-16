@@ -23,15 +23,19 @@
     // accessing request parameters
     String actionStr = request.getParameter("action");
     String test_send = request.getParameter("Test_send");
-    String name=null;
-    String site=null;
+    String name=request.getParameter("name");
+    String site=request.getParameter("site");
     // basic error checking before making a call
     if (actionStr == null || actionStr.isEmpty()) {
         // do nothing
 
     } else if ("onSite".equals(actionStr)) {
         serviceFacade.personOnSite(name, site);
-    } else {
+    }
+    else if("leavingSite".equals(actionStr)){
+        serviceFacade.personLeavingSite(name, site);
+    }
+    else {
         errorMessage = "ERROR: page called for unknown action";
     }
 
@@ -49,19 +53,22 @@
         <div style="color:red;"><%=errorMessage%></div>
         <div style="color:green;"><%=message%></div>
 
-        <p>The time is: <%= new Date().toString()%> (note page is auto refreshed every 20 seconds)</p>
 
-        <!--><p>Getting heartbeat message: <//%= serviceFacade.getHeartbeat()%> (note message is auto refreshed every 20 seconds)</p><!-->
+       <p>Getting heartbeat message: <%= serviceFacade.getHeartbeat()%> (note message is auto refreshed every 20 seconds)</p>
 
         <form action ="./testClientHeartbeat.jsp" method="post">
             <input type="hidden" name="action" value="onSite">
-
-            <button type="submit" >Send on site</button>
+            <td>Site:<input type="textbox" name="site"></td>
+            <td>Person id:<input type="textbox" name="name"></td>
+            <input type="submit" value="On site">
         </form>
-        <form action ="./testClientHeartbeat.jsp" method="post">
+        <form action ="./testClientHeartbeat.jsp" method="get">
             <input type="hidden" name="action" value="leavingSite">
-            <button type="submit" >Leaving site</button>
+            <td>Site:<input type="textbox" name="site"></td>
+            <td>Person id:<input type="textbox" name="name"></td>
+            <input type="submit" value="Leaving site">
         </form>
+        
 
     </body>
 </html>

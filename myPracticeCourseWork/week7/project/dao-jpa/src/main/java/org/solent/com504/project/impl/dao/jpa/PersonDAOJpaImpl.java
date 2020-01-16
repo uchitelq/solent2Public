@@ -52,7 +52,7 @@ public class PersonDAOJpaImpl implements PersonDAO {
     }
 
     @Override
-<<<<<<< HEAD
+
     public boolean deleteById(long id) {
         Person temp = findById( id);
         if(temp ==null) return false;
@@ -61,14 +61,6 @@ public class PersonDAOJpaImpl implements PersonDAO {
         entityManager.getTransaction().commit();
         return true;    
     }
-=======
-    public void deleteById(long id) {
-        entityManager.getTransaction().begin();
-        Query q = entityManager.createQuery("DELETE FROM Person a WHERE a.id=:id");
-        q.setParameter("id", id);
-        q.executeUpdate();
-        entityManager.getTransaction().commit();    }
->>>>>>> f8b45a53c3b412b3b531c12447afc789b9c51ba3
 
     @Override
     public boolean delete(Person person) {
@@ -86,13 +78,18 @@ public class PersonDAOJpaImpl implements PersonDAO {
 
     @Override
     public List<Person> findByRole(Role role) {
-        TypedQuery<Person> q=entityManager.createQuery("SELECT a FORM Person a WHERE a.role = :role",Person.class);
+        
+        TypedQuery<Person> q=entityManager.createQuery("SELECT a FROM Person as a WHERE a.role = :role",Person.class);
+                q.setParameter("role", role);
+
         return q.getResultList();
     }
 
     @Override
     public List<Person> findByName(String fName, String sName) {
-        TypedQuery<Person> q=entityManager.createQuery("SELECT a FORM Person a WHERE a.firstName = :fName AND a.secondName= :sName",Person.class);
+        TypedQuery<Person> q=entityManager.createQuery("SELECT a FROM Person as a WHERE a.firstName = :fName AND a.secondName= :sName",Person.class);
+        q.setParameter("fName", fName);
+        q.setParameter("sName",sName);
         return q.getResultList();
     }
 

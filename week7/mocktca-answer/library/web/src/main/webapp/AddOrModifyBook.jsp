@@ -97,7 +97,8 @@
             </table> 
             <BR>
             <% if ("createBook".equals(action)) {
-            %>
+            %>            <BR>
+
             <input type="hidden" name="action" value="createBook">
             <input type="hidden" name="bookId" value="<%=bookId%>">
             <input type="submit" value="Create New Book">

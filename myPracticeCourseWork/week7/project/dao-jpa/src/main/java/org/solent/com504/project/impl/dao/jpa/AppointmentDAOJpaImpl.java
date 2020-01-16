@@ -45,15 +45,10 @@ public class AppointmentDAOJpaImpl implements AppointmentDAO {
 
     @Override
     public List<Appointment> findAll() {
-<<<<<<< HEAD
         TypedQuery<Appointment> q = entityManager.createQuery("SELECT a FROM Appointment a", Appointment.class);
         List<Appointment> appList = q.getResultList();
         return appList;
-=======
-        TypedQuery<Appointment> q = entityManager.createQuery("SELECT p FROM Appointment p", Appointment.class);
-        List<Appointment> appointmentList = q.getResultList();
-        return appointmentList;    
->>>>>>> f8b45a53c3b412b3b531c12447afc789b9c51ba3
+   
     }
 
     @Override
@@ -77,27 +72,9 @@ public class AppointmentDAOJpaImpl implements AppointmentDAO {
     public void deleteAll() {
         entityManager.getTransaction().begin();
         entityManager.createQuery("DELETE FROM Appointment ").executeUpdate();
-<<<<<<< HEAD
+
         entityManager.getTransaction().commit();    
     }
-=======
-        entityManager.getTransaction().commit();    }
->>>>>>> f8b45a53c3b412b3b531c12447afc789b9c51ba3
 
-    @Override
-    public List<Appointment> findByPersonA(Person personA) {
-        TypedQuery<Appointment> q=entityManager.createQuery("SELECT a FORM Person a WHERE a.role = :role",Appointment.class);//EDIT
-        return q.getResultList();    
-    }
-
-    @Override
-    public List<Appointment> findByPersonB(Person personB) {
-        TypedQuery<Appointment> q=entityManager.createQuery("SELECT a FORM Person a WHERE a.role = :role",Appointment.class);//EDIT
-        return q.getResultList();       }
-
-    @Override
-    public List<Appointment> findByDate(Integer year, Integer month, Integer hour, Integer minutes) {
-        TypedQuery<Appointment> q=entityManager.createQuery("SELECT a FORM Person a WHERE a.role = :role",Appointment.class);//EDIT
-        return q.getResultList();       }
 
 }
